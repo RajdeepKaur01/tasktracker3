@@ -47,7 +47,7 @@ function Register(params) {
     <FormGroup>
       <Label for="password">Password</Label>
       <Input type="password" className="form-control" name="password" value={params.form.password} onChange={update}/>
-      <span>{params.errors.password[0]}</span>
+      <span>{params.errors.password_hash[0]+" " + params.errors.password[0]}</span>
     </FormGroup>
     <FormGroup>
       <Label for="password_confirmation">Confirm Password</Label>

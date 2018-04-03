@@ -23,7 +23,7 @@ defmodule Tasktracker3.Users.User do
     |> validate_confirmation(:password)
     |> validate_password(:password)
     |> put_pass_hash()
-    |> validate_required([:email, :name, :password])
+    |> validate_required([:email, :name, :password_hash])
   end
 
     # Password validation

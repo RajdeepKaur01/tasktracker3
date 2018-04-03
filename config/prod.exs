@@ -15,12 +15,12 @@ use Mix.Config
 # which you typically run after static files are built.
 config :tasktracker3, Tasktracker3Web.Endpoint,
   load_from_system_env: true,
-  url: [host: "tasks3.rajdeepk.site", port: 443],
+  url: [host: "tasks3.rajdeepk.site", port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json"
-  https: [:inet6,
-               port: 443,
-               keyfile: System.get_env("SOME_APP_SSL_KEY_PATH"),
-               certfile: System.get_env("SOME_APP_SSL_CERT_PATH")]
+#  https: [:inet6,
+#               port: 443,
+#               keyfile: Path.expand("priv/ssl/privkey.pem", __DIR__),
+#               certfile: Path.expand("priv/ssl/fullchain.pem", __DIR__)]
 
 # Do not print debug messages in production
 config :logger, level: :info

@@ -15,6 +15,6 @@ config :tasktracker3, Tasktracker3Web.Endpoint,
 config :tasktracker3, Tasktracker3.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "tasktracker3",
-  password: "galaxy1",
+  password: "postgres",
   database: "tasktracker3_prod",
   pool_size: 15

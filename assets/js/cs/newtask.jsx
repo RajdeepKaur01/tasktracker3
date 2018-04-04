@@ -14,20 +14,17 @@ function NewTask(params) {
       type: 'UPDATE_TASK_FORM',
       data: data,
     };
-    console.log(action);
     params.dispatch(action);
   }
 
   function update_check(ev) {
     let toggle = !params.form.complete;
-    console.log("CHECK UPDATE");
-      let data = {};
+    let data = {};
       data["complete"] = toggle;
       let action = {
         type: 'UPDATE_TASK_FORM',
         data: data,
       };
-      console.log(action);
       params.dispatch(action);
     }
 
@@ -44,11 +41,11 @@ function NewTask(params) {
 
   function submit(ev) {
     api.create_task(params.form);
-    console.log("Should create TASK.");
   }
   let users = _.map(params.users, (uu) => <option key={uu.id} value={uu.id}>{uu.email}</option>);
   return <div style={ {padding: "4ex"} }>
     <h2>New Task</h2>
+    <span className="success-msg">{params.errors.success}</span>
     <FormGroup>
       <Label for="title">Title</Label>
       <Input type="text" className="form-control" name="title" value={params.form.title} onChange={update}/>
@@ -74,14 +71,13 @@ function NewTask(params) {
     </FormGroup>
     <FormGroup>
       <Label for="complete" className="label1 inline1">Completed</Label>
-      <Input type="checkbox" className="inline1" name="complete" value={params.form.complete} onChange={update_check}/>
+      <Input type="checkbox" className="inline1" name="complete" checked={params.form.complete} value={params.form.complete} onChange={update_check}/>
     </FormGroup>
     <Button className="btn btn-primary" color="btn-primary" onClick={submit}>Submit</Button>
-    <Button className="btn btn-primary"  onClick={cleardata}>Clear</Button> </div>;
+    <Button className="btn btn-primary" onClick={cleardata}>Clear</Button> </div>;
 }
 
 function state2props(state) {
-  console.log("rerender", state);
   return {
     form: state.taskform,
     errors: state.task_errors,

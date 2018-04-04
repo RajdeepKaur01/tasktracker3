@@ -14,7 +14,6 @@ function Register(params) {
       type: 'UPDATE_FORM',
       data: data,
     };
-    console.log(action);
     params.dispatch(action);
   }
 
@@ -34,6 +33,7 @@ function Register(params) {
   }
 
   return <div style={ {padding: "4ex"} }>
+    <span className="success-msg">{params.errors.success}</span>
     <FormGroup>
       <Label for="email">Email</Label>
       <Input type="email" className="form-control" name="email" placeholder="abc@example.com" value={params.form.email} onChange={update}/>
@@ -47,7 +47,7 @@ function Register(params) {
     <FormGroup>
       <Label for="password">Password</Label>
       <Input type="password" className="form-control" name="password" value={params.form.password} onChange={update}/>
-      <span>{params.errors.password_hash[0]+" " + params.errors.password[0]}</span>
+      <span>{params.errors.password[0]}</span>
     </FormGroup>
     <FormGroup>
       <Label for="password_confirmation">Confirm Password</Label>
@@ -59,7 +59,6 @@ function Register(params) {
 }
 
 function state2props(state) {
-  console.log("rerender", state);
   return {
     form: state.form,
     errors: state.user_errors,

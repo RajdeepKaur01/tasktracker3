@@ -43,7 +43,6 @@ class TheServer {
       dataType: "json",
       contentType: "application/json; charset=UTF-8",
       success: (resp) => {
-        console.log("DELETED"+id);
         store.dispatch({
           type: 'DELETE_TASK',
           id: id,
@@ -68,31 +67,36 @@ class TheServer {
 
 
   register_user(data) {
-    $.ajax("/api/v1/users", {
-      method: "post",
-      dataType: "json",
-      contentType: "application/json; charset=UTF-8",
-      data: JSON.stringify({ user: data }),
-      success: (resp) => {
-        alert("User Registered Successfully!!");
-        store.dispatch({
-          type: 'ADD_USER',
-          user: resp.data,
-        });
-        store.dispatch({
-          type: 'CLEAR_FORM'
-        });
-        store.dispatch({
-          type: 'CLEAR_USER_ERROR'
-        });
-      },
-      error: (resp) => {
-        store.dispatch({
-          type: 'USER_FORM_ERROR',
-          errors: resp.responseJSON.errors,
-        });
-      },
-    });
+      $.ajax("/api/v1/users", {
+        method: "post",
+        dataType: "json",
+        contentType: "application/json; charset=UTF-8",
+        data: JSON.stringify({ user: data }),
+        success: (resp) => {
+          store.dispatch({
+            type: 'ADD_USER',
+            user: resp.data,
+          });
+          store.dispatch({
+            type: 'CLEAR_FORM'
+          });
+          store.dispatch({
+            type: 'USER_FORM_ERROR',
+            errors: {"success": "User registered successfully!!"},
+          });
+        },
+        error: (resp) => {
+          let errors = resp.responseJSON.errors;
+          if(data.password==""){
+            errors["password"] = ["can't be blank"];
+          }
+          // else   errors["password"] = "";
+          store.dispatch({
+            type: 'USER_FORM_ERROR',
+            errors: resp.responseJSON.errors,
+          });
+        },
+      });
   }
 
   create_task(data) {
@@ -102,7 +106,6 @@ class TheServer {
       contentType: "application/json; charset=UTF-8",
       data: JSON.stringify({ task: data }),
       success: (resp) => {
-        alert("Task Created Successfully!!");
         store.dispatch({
           type: 'ADD_TASK',
           task: resp.data,
@@ -111,11 +114,11 @@ class TheServer {
           type: 'CLEAR_TASK_FORM'
         });
         store.dispatch({
-          type: 'CLEAR_TASK_ERROR'
+          type: 'TASK_FORM_ERROR',
+          errors: {"success": "Task created successfully"},
         });
       },
       error: (resp) => {
-        console.log(resp);
         store.dispatch({
           type: 'TASK_FORM_ERROR',
           errors: resp.responseJSON.errors,
@@ -131,7 +134,6 @@ class TheServer {
       contentType: "application/json; charset=UTF-8",
       data: JSON.stringify({ task: data }),
       success: (resp) => {
-        alert("Task updated Successfully!!");
         store.dispatch({
           type: 'DELETE_TASK',
           id: id,
@@ -140,9 +142,12 @@ class TheServer {
           type: 'ADD_TASK',
           task: resp.data,
         });
+        store.dispatch({
+          type: 'TASK_FORM_ERROR',
+          errors: {"success": "Task updated successfully"},
+        });
       },
       error: (resp) => {
-        console.log(resp);
         store.dispatch({
           type: 'TASK_FORM_ERROR',
           errors: resp.responseJSON.errors,

@@ -17,7 +17,6 @@ function LoginForm(props) {
 
   function create_token(ev) {
     api.submit_login(props.login);
-    console.log(props.login);
   }
 
   return <div className="row dcenter">

@@ -28,6 +28,9 @@ let Tasktracker = connect((state) => state)((props) => {
           <Route path="/" exact={true} render={() =>
             logged_in? <Tasks tasks={props.tasks}/> : <p>Welcome!!<br/> Login to view tasks</p>
           } />
+          <Route path="/tasks" exact={true} render={() =>
+            logged_in? <Tasks tasks={props.tasks}/> : <p>Welcome!!<br/> Login to view tasks</p>
+          } />
           <Route path="/register" exact={true} render={() =>
             <Register />
           } />

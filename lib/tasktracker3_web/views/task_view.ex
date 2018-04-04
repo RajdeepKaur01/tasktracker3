@@ -18,7 +18,8 @@ defmodule Tasktracker3Web.TaskView do
       complete: task.complete,
       assigned_email: task.assigned_user.email,
       assigned_to: task.assigned_to,
-      user_id: task.user_id}
+      user_id: task.user_id,
+      created_by: task.user.name}
   end
 
 end

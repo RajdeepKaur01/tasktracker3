@@ -16,7 +16,6 @@ function EditTask(params) {
       type: 'UPDATE_EDITTASK_FORM',
       data: data,
     };
-    console.log(action);
     params.dispatch(action);
   }
 
@@ -28,17 +27,17 @@ function EditTask(params) {
         type: 'UPDATE_EDITTASK_FORM',
         data: data,
       };
-      console.log(action);
       params.dispatch(action);
     }
 
   function submit(ev) {
     api.update_task(params.form,params.form.id);
-    console.log("Should create TASK.");
   }
   let users = _.map(params.users, (uu) => <option key={uu.id} value={uu.id}>{uu.email}</option>);
   return <div style={ {padding: "4ex"} }>
     <h2>Edit Task</h2>
+      <span className="success-msg">{params.errors.success}</span>
+    <h5>Created By: {params.form.created_by}</h5>
     <FormGroup>
       <Label for="title">Title</Label>
       <Input type="text" className="form-control" name="title" value={params.form.title} onChange={update}/>
@@ -73,7 +72,6 @@ function EditTask(params) {
 }
 
 function state2props(state) {
-  console.log("rerender", state);
   return {
     form: state.edittaskform,
     errors: state.task_errors,

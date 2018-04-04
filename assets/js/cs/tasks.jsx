@@ -16,7 +16,6 @@ let Task = ((props) => {
 
   function delete_task(ev) {
     api.delete_task(task.id);
-    console.log("Should create TASK.");
   }
   function update_task_form(ev){
     let action = {
@@ -28,7 +27,6 @@ let Task = ((props) => {
       type: 'CLEAR_TASK_ERROR',
     };
     prop.dispatch(action1);
-    console.log(action);
   }
 
   return <tr>

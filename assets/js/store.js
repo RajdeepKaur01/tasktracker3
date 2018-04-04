@@ -65,6 +65,7 @@ let default_user_errors = {
   password_hash:[""],
   password_confirmation: [""],
   login: "",
+  success: "",
 };
 
 function user_errors(state = default_user_errors, action) {
@@ -144,6 +145,7 @@ let default_task_errors = {
   assigned_to: "",
   worktime: "",
   complete: "",
+  success: "",
 };
 
 function task_errors(state = default_task_errors, action) {
@@ -163,7 +165,7 @@ function root_reducer(state0, action) {
   // {posts: posts, users: users, form: form}
   let reducer = combineReducers({tasks, users, form, user_errors, token, login, taskform, task_errors, edittaskform});
   let state1 = reducer(state0, action);
-  console.log("state1", state1);
+  // console.log("state1", state1);
   return deepFreeze(state1);
 };
 

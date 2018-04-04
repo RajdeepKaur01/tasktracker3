@@ -65,7 +65,7 @@ function Nav(props) {
       </span>
       <ul className="navbar-nav mr-auto">
         <NavItem>
-          <NavLink to="/" exact={true} activeClassName="active" className="nav-link links">Dashboard</NavLink>
+          <NavLink to="/" exact={true} activeClassName="active" className="nav-link links">Tasks</NavLink>
         </NavItem>
         <NavItem>
           {props.token? <NavLink to="/tasks/new" className="nav-link links" onClick={cleardata}>New Task</NavLink> : ""}

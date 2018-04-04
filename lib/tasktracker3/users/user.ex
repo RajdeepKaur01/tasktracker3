@@ -20,11 +20,24 @@ defmodule Tasktracker3.Users.User do
     user
     |> cast(attrs, [:email, :name, :password, :password_confirmation])
     |> unique_constraint(:email)
+    |> validate_email(:email)
     |> validate_confirmation(:password)
     |> validate_password(:password)
     |> put_pass_hash()
     |> validate_required([:email, :name, :password_hash])
   end
+
+
+  # ensure that the email looks valid
+ def validate_email(changeset, field, options \\ []) do
+   validate_change(changeset, field, fn _, email ->
+     case Regex.run(~r/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/, email) do
+       nil ->
+        [{field, options[:message] || "Invalid Email"}]
+      _->[]
+       end
+   end)
+ end
 
     # Password validation
     # From Comeonin docs
@@ -46,4 +59,5 @@ defmodule Tasktracker3.Users.User do
       {:ok, password}
     end
     def valid_password?(_), do: {:error, "The password is too short"}
+
 end

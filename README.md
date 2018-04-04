@@ -9,6 +9,7 @@
   * Users page will list name and email of all the existing users (static page).
   * If user enter negative value or number that is not multiple of 15 manually in WorkTime field in Task , he will get error message. If he enters anything other than number, the task will be created with worktime set to 0.
   * User will see name of user who created the task on task Edit Page.
+  * User will be logged out if he reloads the page.
 
 Users of app will be able to:
 

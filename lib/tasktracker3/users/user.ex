@@ -31,6 +31,7 @@ defmodule Tasktracker3.Users.User do
   # ensure that the email looks valid
  def validate_email(changeset, field, options \\ []) do
    validate_change(changeset, field, fn _, email ->
+     # Below line taken from https://gist.github.com/mgamini/4f3a8bc55bdcc96be2c6
      case Regex.run(~r/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/, email) do
        nil ->
         [{field, options[:message] || "Invalid Email"}]
